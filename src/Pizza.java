@@ -12,6 +12,8 @@ public class Pizza {
     private boolean champis;
 
     private boolean jamon;
+
+    private boolean salsa;
     private int recojida;
 
     // tipo de masa
@@ -27,15 +29,17 @@ public class Pizza {
     public static final int TIENDA = 0;
     public static final int PARALLEVAR = 1;
 
+    //constructor de pizza por defecto. Se usa en el builder
     public Pizza() {
-        this.cebolla = true;
+        this.cebolla = false;
         this.recojida = TIENDA;
         this.rellena = false;
         this.sinGluten = false;
         this.extraQueso = true;
         this.pineapple = false;
-        this.champis = true;
-        this.jamon = true;
+        this.champis = false;
+        this.jamon = false;
+        this.salsa = false;
         this.size = MEDIUM;
         this.tipoMasa = FINA;
     }
@@ -52,10 +56,10 @@ public class Pizza {
      * @param extraQueso doble de queso
      * @param sinGluten  con o sin piña
      * @param champis    con o sin champiñones
-     * @param jamon con o sin jamón
+     * @param jamon      con o sin jamón
      * @param recojida   como lo va a recoger el cliente
      */
-    public Pizza(int tipoMasa, int size, boolean rellena, boolean cebolla, boolean sinGluten, boolean extraQueso, boolean pineapple, boolean champis, boolean jamon, int recojida) {
+    public Pizza(int tipoMasa, int size, boolean rellena, boolean cebolla, boolean sinGluten, boolean extraQueso, boolean pineapple, boolean champis, boolean jamon, boolean salsa, int recojida) {
         this.tipoMasa = tipoMasa;
         this.size = size;
         this.rellena = rellena;
@@ -65,6 +69,7 @@ public class Pizza {
         this.pineapple = pineapple;
         this.champis = champis;
         this.jamon = jamon;
+        this.salsa = salsa;
         this.recojida = recojida;
     }
 
@@ -162,5 +167,13 @@ public class Pizza {
 
     public void setJamon(boolean jamon) {
         this.jamon = jamon;
+    }
+
+    public boolean isSalsa() {
+        return salsa;
+    }
+
+    public void setSalsa(boolean salsa) {
+        this.salsa = salsa;
     }
 }
