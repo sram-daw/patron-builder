@@ -1,16 +1,16 @@
 public class PizzaBuilder {
 
-    //objeto pizza que construye el builder
+    //objeto pizza vacío como atributo
     private Pizza build_pizza;
-
-    // metodo que devuelve el objeto terminado
-    public Pizza build() {
-        return this.build_pizza;
-    }
 
     // constructor que crea la pizza por defecto para configurarla
     public PizzaBuilder() {
         this.build_pizza = new Pizza();
+    }
+
+    // metodo que devuelve el objeto terminado
+    public Pizza build() {
+        return this.build_pizza;
     }
 
     // metodos para la personalizacion de la pizza
