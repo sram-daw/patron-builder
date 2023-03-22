@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
 
-        //Instancia de la pizza con defecto con el patrón builder
+        //Instancia de la pizza por defecto con el patrón builder
         Pizza pizzaConBuilder= new PizzaBuilder().build(); //se instancia el objeto PizzaBuilder, creando su atributo build_pizza con el constructor. Luego esa pizza la devuelve el método build para asignarla a pizzaConBuilder
 
         //Instancia de una pizza customizada con el patrón builder
