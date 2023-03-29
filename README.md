@@ -85,7 +85,7 @@ classDiagram
 - __¿Podríamos combinarlo con el patrón Factory? Explícalo con algo de código como lo harías__
 
 Sí, se podrían implementar ambos patrones. La clase Builder podría implementarse en la clase Factory, en lugar de en la clase Main directamente. De esta forma, Factory crearía los objetos por mediación de Builder.
-En este ejemplo, en la clase Factory, concretamente en el método getProducto, podrían introducirse los métodos de los constructores para cada tipo de método de pago para instanciar distintas clases:
+Siguiendo el ejemplo anterior, en la clase Factory, concretamente en el método getProducto, podrían introducirse los métodos de las clases constructoras o builder para cada tipo de forma de pago. Así, podríamos instanciar distintas clases:
 ```
 public static Compra getProducto(int metodoPago) {
 switch (metodoPago) {
