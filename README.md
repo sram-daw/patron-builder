@@ -27,75 +27,77 @@ Crea una rama nueva que se llame 'builder'
 
 Luego con este repositorio como ejemplo, crear tu propio builder y cambia el main en esta nueva rama, para crear la pizza con el builder.
 
-### Reflexiona:
+## Preguntas:
 
-- __¿Cual es la función de este patrón?__
+- __¿Cual es la función del patrón builder? Pon un ejemplo:__
 
-Respuesta: La función de este patrón es separar la construcción de un objeto complejo de su representación, permitiendo dicha construcción de forma incremental y segmentada, hasta que se obtenga el resultado deseado pero partiendo de una misma base. Esto hace más sencilla la personalización y reduce la complejidad de la construcción al permitir que los detalles específicos de la construcción estén encapsulados en la clase Builder (PizzaBuilder en este caso).
+El patrón Builder es un patrón de diseño que se utiliza para crear objetos complejos paso a paso, permitiendo la producción de diferentes representaciones del mismo objeto.
 
-- __¿Podríamos combinarlo con el patrón Factory?__
+La idea principal detrás de este patrón es separar la construcción de un objeto complejo de su representación, de modo que el mismo proceso de construcción pueda crear diferentes representaciones del objeto. Esto significa que el código puede crear objetos complejos sin tener que conocer los detalles de su construcción.
 
-Respuesta: Sí, se podrían implementar ambos patrones. La clase Builder podría implementarse en la clase Factory, en lugar de en la clase Main directamente. De esta forma, Factory crearía los objetos por mediación de Builder.
+Un ejemplo práctico del patrón Builder podría ser la construcción de un objeto de una clase "Compra" que contiene una lista de productos, un cliente y una dirección de envío. En lugar de crear un constructor con muchos parámetros, que puede ser difícil de usar y mantener, se puede utilizar el patrón Builder para crear objetos de "Compra" paso a paso.
 
-- __¿Como es su Diagrama de clases? Realiza en el readme el diagrama__
+Así, se podría crear una interfaz "ConstructorCompra" con métodos para agregar un producto, establecer el cliente y establecer la dirección de envío. Luego, se podrían implementar diferentes clases de constructores de Compra que sigan la misma interfaz, pero que construyan los objetos de diferentes maneras.
+
+
+- __¿Podríamos combinarlo con el patrón Factory? Explícalo con algo de código como lo harías__
+
+Sí, se podrían implementar ambos patrones. La clase Builder podría implementarse en la clase Factory, en lugar de en la clase Main directamente. De esta forma, Factory crearía los objetos por mediación de Builder.
+En este ejemplo, en la clase Factory, concretamente en el método getProducto, podrían introducirse los métodos de los constructores para cada tipo de método de pago para instanciar distintas clases:
+```
+public static Compra getProducto(int metodoPago) {
+switch (metodoPago) {
+case TARJETA:
+return new ConstructorTarjeta()
+.build();
+case PAYPAL:
+return new ConstructorPaypal()
+.build();
+case TRANSFERENCIA:
+return new ConstructorTransf()
+.build();
+default:
+return null;
+}
+```
+- __¿Cómo es el diagrama de clases de este ejemplo que has hecho?__
 
 ```mermaid
 classDiagram
-      class Pizza {
-        -tipoMasa: String
-        -size: String 
-        -sinGluten: boolean 
-        -relleno: boolean 
-        -pineapple: boolean 
-        -cebolla: boolean 
-        -extraQueso: boolean 
-        -champis: boolean 
-        -jamon: boolean 
-        -salsa: boolean 
-        -recojida: String 
-        +FINA: int
-        +PAN: int
-        +SMALL: int
-        +MEDIUM: int
-        +BIG: int
-        +TIENDA: int
-        +PARALLEVAR: int
-        +Pizza(String tipoMasa, String size, boolean sinGluten, boolean relleno, boolean pineapple, boolean cebolla, boolean extraQueso, boolean champis, boolean jamon, boolean salsa, String recojida)
-        +getTipoMasa(): String
-        +getSize(): String
-        +getSinGluten(): boolean
-        +getRelleno(): boolean
-        +getPineapple(): boolean
-        +getCebolla(): boolean
-        +getExtraQueso(): boolean
-        +getChampis(): boolean
-        +getJamon(): boolean
-        +getSalsa(): boolean
-        +getRecojida(): String
-        +toString(): String
+      class Compra {
+        -codigoCompra:int
+        -metodoPago: String
+        -direccion: String 
+        -cp: int 
+        -tlf: int
+        -email: String
+        -nTarjeta: int 
+        -codigoSocio: int 
+        +TARJETA: int
+        +PAYPAL: int
+        +TRANSFERENCIA: int
+        +Compra(int codigoCompra, String metodoPago, String direccion, int cp, int tlf, String email, int nTarjeta, int codigoSocio, String pago)
       }
 
-      class PizzaBuilder {
-        -String tipoMasa
-        -String size
-        -boolean sinGluten
-        -boolean relleno
-        -boolean pineapple
-        -boolean cebolla
-        -boolean extraQueso
-        -boolean champis
-        -boolean jamon
-        -boolean salsa
-        +PizzaBuilder()
-        +build(): Pizza
+      class ConstructorCompra {
+        -int codigoCompra
+        -String metodoPago
+        -String direccion
+        -int cp
+        -int tlf
+        -String email
+        -int nTarjeta
+        -int codigoSocio
+        +ConstructorCompra()
+        +build(): Compra
       }
       
       class Main {
         +main()
       }
       
-      PizzaBuilder "1" *-- "*" Pizza : association
+      ConstructorCompra "1" *-- "*" Compra : association
       
-      Main "1" *-- "*" PizzaBuilder : association
+      Main "1" *-- "*" ConstructorCompra : association
 
 ```
