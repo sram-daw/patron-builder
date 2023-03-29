@@ -40,26 +40,6 @@ Un ejemplo práctico del patrón Builder podría ser la construcción de un obje
 Así, se podría crear una interfaz "ConstructorCompra" con métodos para agregar un producto, establecer el cliente y establecer la dirección de envío. Luego, se podrían implementar diferentes clases de constructores de Compra que sigan la misma interfaz, pero que construyan los objetos de diferentes maneras.
 
 
-- __¿Podríamos combinarlo con el patrón Factory? Explícalo con algo de código como lo harías__
-
-Sí, se podrían implementar ambos patrones. La clase Builder podría implementarse en la clase Factory, en lugar de en la clase Main directamente. De esta forma, Factory crearía los objetos por mediación de Builder.
-En este ejemplo, en la clase Factory, concretamente en el método getProducto, podrían introducirse los métodos de los constructores para cada tipo de método de pago para instanciar distintas clases:
-```
-public static Compra getProducto(int metodoPago) {
-switch (metodoPago) {
-case TARJETA:
-return new ConstructorTarjeta()
-.build();
-case PAYPAL:
-return new ConstructorPaypal()
-.build();
-case TRANSFERENCIA:
-return new ConstructorTransf()
-.build();
-default:
-return null;
-}
-```
 - __¿Cómo es el diagrama de clases de este ejemplo que has hecho?__
 
 ```mermaid
@@ -99,5 +79,26 @@ classDiagram
       ConstructorCompra "1" *-- "*" Compra : association
       
       Main "1" *-- "*" ConstructorCompra : association
+```
 
+
+- __¿Podríamos combinarlo con el patrón Factory? Explícalo con algo de código como lo harías__
+
+Sí, se podrían implementar ambos patrones. La clase Builder podría implementarse en la clase Factory, en lugar de en la clase Main directamente. De esta forma, Factory crearía los objetos por mediación de Builder.
+En este ejemplo, en la clase Factory, concretamente en el método getProducto, podrían introducirse los métodos de los constructores para cada tipo de método de pago para instanciar distintas clases:
+```
+public static Compra getProducto(int metodoPago) {
+switch (metodoPago) {
+case TARJETA:
+return new ConstructorTarjeta()
+.build();
+case PAYPAL:
+return new ConstructorPaypal()
+.build();
+case TRANSFERENCIA:
+return new ConstructorTransf()
+.build();
+default:
+return null;
+}
 ```
